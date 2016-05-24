@@ -1,3 +1,4 @@
+import THREE from 'three';
 import LatLngVisualizer from './LatLngVisualizer';
 
 export default class WebGLCanvas {

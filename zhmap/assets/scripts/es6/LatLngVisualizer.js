@@ -1,3 +1,4 @@
+import THREE from 'three';
 import settings from './setting';
 
 /**

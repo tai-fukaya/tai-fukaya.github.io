@@ -1,3 +1,4 @@
+import jQuery from 'jQuery';
 import settings from './setting';
 import WebGLCanvas from './WebGLCanvas';
 
