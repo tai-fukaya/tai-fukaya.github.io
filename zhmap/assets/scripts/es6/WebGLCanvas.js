@@ -1,10 +1,19 @@
 import THREE from 'three';
 import LatLngVisualizer from './LatLngVisualizer';
+import settings from './setting';
 
+/**
+ * WebGL用のキャンバスを管理する
+ */
 export default class WebGLCanvas {
-	constructor(w, h, $) {
-		this.width = w;
-		this.height = h;
+	/**
+	 * コンストラクタ
+	 * @param {string} width - 幅
+	 * @param {string} height - 高さ
+	 */
+	constructor(width, height) {
+		this.width = width;
+		this.height = height;
 		this.cameraFov = 60;
 		let cameraZpos = this.height / 2 * Math.sqrt(3);
 
@@ -23,14 +32,21 @@ export default class WebGLCanvas {
 		this.camera = new THREE.PerspectiveCamera(this.cameraFov, this.width / this.height, 0.1, 1000);
 		this.camera.position.z = cameraZpos;
 
-		this.visualizer = new LatLngVisualizer(w, h, $);
+		this.visualizer = new LatLngVisualizer(this.width, this.height, settings.jsonurl);
 		this.scene.add(this.visualizer);
 	}
-
+	
+	/**
+	 * アニメーション
+	 */
 	animate() {
 		this.renderer.render(this.scene, this.camera);
 	}
-
+	/**
+	 * 表示サイズを変更する
+	 * @param {string} width - 幅
+	 * @param {string} height - 高さ
+	 */
 	resize(width, height) {
 		this.width = width;
 		this.height = height;

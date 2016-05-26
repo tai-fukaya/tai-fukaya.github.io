@@ -1,25 +1,28 @@
+import $ from 'jQuery';
 import THREE from 'three';
-import settings from './setting';
 
 /**
- * this is THREE.LatLngVisualizer description.
- * 
+ * 経度緯度表示
+ * jsonで取得した情報より、
+ * 画面サイズにあわせて、
+ * 全データを経度緯度情報をもとに、点で表示する
  */
 export default class LatLngVisualizer extends THREE.Object3D {
 	/**
-	 * this is MyClass constructor description.
-	 * @param {string} [name="anonymous"] - this is name description.
+	 * コンストラクタ、初期表示時の幅と高さを設定する。
+	 * @param {string} width - 幅.
+	 * @param {string} height - 高さ.
+	 * @param {array} filePaths - jsonファイルのパス
 	 */
-	constructor(w, h, $) {
+	constructor(width, height, filePaths) {
 		super();
 
-		let filePaths = settings.jsonurl;
 		let completed = 0;
 		let self = this;
 
 		this.data = [];
-		this.width = w;
-		this.height = h;
+		this.width = width;
+		this.height = height;
 
 		// 全部読み込む
 		filePaths.forEach((filePath) => {
@@ -43,13 +46,16 @@ export default class LatLngVisualizer extends THREE.Object3D {
 			transparent: true
 		});
 		let particle = new THREE.Points(geometry, material);
-		particle.position.x = -w / 2;
-		particle.position.y = -h / 2;
+		particle.position.x = -this.width / 2;
+		particle.position.y = -this.height / 2;
 		particle.visible = false;
 		this.particle = particle;
 
 		this.add(this.particle);
 	}
+	/**
+	 * 全点の初期表示の色を設定する
+	 */
 	initializeGeometryColors() {
 		let colors = new Float32Array(this.data.length * 3);
 		this.data.forEach((data, i) => {
@@ -58,6 +64,9 @@ export default class LatLngVisualizer extends THREE.Object3D {
 		});
 		this.particle.geometry.addAttribute('color', new THREE.BufferAttribute(colors, 3));
 	}
+	/**
+	 * 全点の表示用の位置を設定する
+	 */
 	calculateGeometryPositions() {
 
 		let self = this;
@@ -118,6 +127,12 @@ export default class LatLngVisualizer extends THREE.Object3D {
 		self.particle.position.y = -self.height / 2;
 		self.particle.visible = true;
 	}
+	/**
+	 * jsonデータから、条件にあうデータを検索する
+	 * 前方一致の点を色を変更する
+	 * 完全一致の点の情報を返す
+	 * @param {string} key - 行政区画番号
+	 */
 	search(key) {
 		let ret = {};
 		if (!this.particle.visible) {
@@ -140,6 +155,11 @@ export default class LatLngVisualizer extends THREE.Object3D {
 		this.particle.geometry.addAttribute('color', new THREE.BufferAttribute(colors, 3));
 		return ret;
 	}
+	/**
+	 * 表示サイズを変更する
+	 * @param {string} width - 幅
+	 * @param {string} height - 高さ
+	 */
 	resize(width, height) {
 		this.width = width;
 		this.height = height;
