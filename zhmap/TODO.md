@@ -12,12 +12,19 @@
 
 県まではWikipediaから、ほぼ満足できるデータとれそう
 
+直辖市	省	自治区	特别行政区
+地级市	地区	自治州	盟
+市辖区	县级市	县	自治县	旗	自治旗	特区	林区
+街道	镇	乡	民族乡	苏木	民族苏木	区公所
+
 # 行政区画番号
 ここベースでとれるけど、郷級以下は、あやしいところもある
 http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/index.html
 
 行政区画番号、URL、省級、地級、県級、郷級、村級
-areaid,url,ministry,province,city,town,village
+areaid,url,province,city,county,town,village
+
+たまにパースに失敗こく
 
 ## 行政区画変更履歴
 http://www.mca.gov.cn/article/sj/xzqh/2018/
