@@ -25,6 +25,26 @@ http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/index.html
 areaid,url,province,city,county,town,village
 
 たまにパースに失敗こく
+```
+delete trs;
+delete csvs;
+var trs = document.getElementsByClassName("countytr");
+var csvs = [];
+for (let tr of trs) {
+    let cells = tr.getElementsByTagName("td");
+    let areaid = cells[0].innerText.trim();
+    let name = cells[1].innerText.trim();
+    let href = "";
+    let link = cells[0].getElementsByTagName("a");
+    if (link.length) {
+        href = link[0].href.replace("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/", "");
+    }
+    let type = 0;
+    let items = [areaid, 2, 0, href, "陕西省", "西安市", name];
+    csvs.push(items.join(","));
+}
+console.log(csvs.join("\n"));
+```
 
 ## 行政区画変更履歴
 http://www.mca.gov.cn/article/sj/xzqh/2018/
