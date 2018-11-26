@@ -36,6 +36,6 @@ for tr in trs:
             href.replace(".html", ""), "0", str(tp), href, name
         ]))
 
-file = open("data/areaid_level0_zh.csv", "w")
+file = open("data/done.csv", "w")
 file.write("\n".join(csv_data))
 file.close()

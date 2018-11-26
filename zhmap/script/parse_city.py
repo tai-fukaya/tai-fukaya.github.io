@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "citytr"
 open_file = "data/areaid_level0_zh.csv"
-output_file = "data/areaid_level1_zh.csv"
+output_file = "data/done.csv"
 
 
 class ZhInfo(object):
