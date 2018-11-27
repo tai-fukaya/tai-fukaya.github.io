@@ -7,9 +7,7 @@ from bs4 import BeautifulSoup
 
 root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "countytr"
-# open_file = "data/areaid_level1_zh.csv"
-# output_file = "data/areaid_level2_zh.csv"
-open_file = "data/mistake.csv"
+open_file = "data/areaid_level1_zh.csv"
 output_file = "data/done.csv"
 
 
@@ -30,15 +28,12 @@ def get_url(info):
     res = subprocess.check_output([
         "curl", root_host + info.url
     ])
-    print(res)
-    return BeautifulSoup(res, "lxml")
+    return BeautifulSoup(res.decode('gbk'), "lxml")
 
 
 def parse(info, soup):
     trs = soup.find_all("tr", attrs={"class": tr_class})
     lists = []
-    print(len(trs))
-    # print(soup.text)
     for tr in trs:
         cells = tr.find_all("td")
         atag = cells[0].find("a")
@@ -73,13 +68,13 @@ def parse(info, soup):
 
 with open(open_file, "r") as f:
     data = f.read().split("\n")
-    # file = open(output_file, "w")
+    file = open(output_file, "w")
     # print(len(data))
     for idx, d in enumerate(data):
         sp = d.split(",")
         if idx % 10 == 0:
             time.sleep(1)
-        if not len(sp):
+        if len(sp) <= 1:
             continue
         info = ZhInfo()
         info.areaid = sp[0]
@@ -92,9 +87,8 @@ with open(open_file, "r") as f:
         print(info.city)
         soup = get_url(info)
         csv_data = parse(info, soup)
-        # file.write("\n".join(csv_data))
-        # file.write("\n")
+        file.write("\n".join(csv_data))
+        file.write("\n")
         time.sleep(.1)
-        break
     print("finish")
-    # file.close()
+    file.close()

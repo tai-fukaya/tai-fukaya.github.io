@@ -11,7 +11,7 @@ res = subprocess.check_output([
     "curl",
     root_host + "index.html"
 ])
-soup = BeautifulSoup(res, "lxml")
+soup = BeautifulSoup(res.decode('gbk'), "lxml")
 
 trs = soup.find_all("tr", attrs={"class": tr_class})
 csv_data = []

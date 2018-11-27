@@ -31,7 +31,7 @@ def get_url(info):
         "curl", root_host + info.url
     ])
 
-    return BeautifulSoup(res, "lxml")
+    return BeautifulSoup(res.decode('gbk'), "lxml")
 
 
 def parse(info, soup):
