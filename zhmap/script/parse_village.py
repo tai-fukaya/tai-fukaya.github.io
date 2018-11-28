@@ -8,9 +8,16 @@ from bs4 import BeautifulSoup
 root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
-output_file = "data/areaid_level4_zh.csv"
-begin = 0
-end = 652
+output_file = "data/areaid_level4_zh.3.csv"
+begin = 1187
+end = 2989
+# 337, 642, 2990, 4772, 5740,
+# 7330, 8368, 10339, 10573, 12141,
+# 13541, 15186, 16371, 18154, 20005,
+# 22571, 24055, 26057, 27835, 29126,
+# 29370, 30402, 35049, 36530, 37970,
+# 38671, 39990, 41425, 41855, 42120,
+# 43253
 
 
 class ZhInfo(object):
@@ -59,7 +66,7 @@ with open(open_file, "r") as f:
     file = open(output_file, "w")
     # print(len(data))
     for idx, d in enumerate(data):
-        if idx < begin or idx > end:
+        if idx + 1 < begin or idx >= end:
             continue
         sp = d.split(",")
         if idx % 10 == 0:
