@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/index.html
 
+import random
 import subprocess
 import time
 from bs4 import BeautifulSoup
@@ -8,10 +9,11 @@ from bs4 import BeautifulSoup
 root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
-output_file = "data/areaid_level4_zh.3.csv"
-begin = 1187
-end = 2989
-# 337, 642, 2990, 4772, 5740,
+# open_file = "data/mistake.2.csv"
+output_file = "data/areaid_level4_zh.4.csv"
+begin = 2990
+end = 4471
+# 337, 642, 2990, 4472, 5740,
 # 7330, 8368, 10339, 10573, 12141,
 # 13541, 15186, 16371, 18154, 20005,
 # 22571, 24055, 26057, 27835, 29126,
@@ -93,6 +95,6 @@ with open(open_file, "r") as f:
         csv_data = parse(info, soup)
         file.write("\n".join(csv_data))
         file.write("\n")
-        time.sleep(.1)
+        time.sleep(.1 + random.random() * 3.)
     print("finish")
     file.close()
