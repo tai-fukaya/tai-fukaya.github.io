@@ -10,9 +10,9 @@ root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
 # open_file = "data/mistake.2.csv"
-output_file = "data/areaid_level4_zh.4.csv"
-begin = 2990
-end = 4471
+output_file = "data/areaid_level4_zh.5.csv"
+begin = 4472
+end = 8367
 # 337, 642, 2990, 4472, 5740,
 # 7330, 8368, 10339, 10573, 12141,
 # 13541, 15186, 16371, 18154, 20005,
@@ -72,7 +72,7 @@ with open(open_file, "r") as f:
             continue
         sp = d.split(",")
         if idx % 10 == 0:
-            time.sleep(1)
+            time.sleep(5)
         if len(sp) <= 1:
             continue
         info = ZhInfo()
