@@ -10,11 +10,13 @@ root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
 # open_file = "data/mistake.2.csv"
-output_file = "data/areaid_level4_zh.5.csv"
-begin = 4472
-end = 8367
-# 337, 642, 2990, 4472, 5740,
-# 7330, 8368, 10339, 10573, 12141,
+output_file = "data/areaid_level4_zh.9.csv"
+begin = 8704
+# begin = 1
+end = 13540
+# 1, 337, 642, 2990,
+# 4472, 5740, 7330, 8368,
+# 10339, 10573, 12141,
 # 13541, 15186, 16371, 18154, 20005,
 # 22571, 24055, 26057, 27835, 29126,
 # 29370, 30402, 35049, 36530, 37970,
@@ -37,7 +39,7 @@ class ZhInfo(object):
 
 def get_url(info):
     res = subprocess.check_output([
-        "curl", root_host + info.url
+        "curl", root_host + info.url, "-m", "30"
     ])
 
     return BeautifulSoup(res.decode('gbk'), "lxml")
@@ -66,7 +68,6 @@ def parse(info, soup):
 with open(open_file, "r") as f:
     data = f.read().split("\n")
     file = open(output_file, "w")
-    # print(len(data))
     for idx, d in enumerate(data):
         if idx + 1 < begin or idx >= end:
             continue
@@ -91,8 +92,12 @@ with open(open_file, "r") as f:
         print(info.town)
         if not info.url:
             continue
-        soup = get_url(info)
-        csv_data = parse(info, soup)
+        csv_data = []
+        try:
+            soup = get_url(info)
+            csv_data = parse(info, soup)
+        except Exception as e:
+            print(e)
         file.write("\n".join(csv_data))
         file.write("\n")
         time.sleep(.1 + random.random() * 3.)
