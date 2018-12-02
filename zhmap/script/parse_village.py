@@ -10,16 +10,16 @@ root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
 # open_file = "data/mistake.2.csv"
-output_file = "data/areaid_level4_zh.11.csv"
-begin = 15186
+output_file = "data/areaid_level4_zh.13.csv"
+begin = 24055
 # begin = 1
-end = 16370
+end = 29369
 # 1, 337, 642, 2990,
 # 4472, 5740, 7330, 8368,
-# 10339, 10573, 12141,
-# 13541, 15186,
-# 16371, 18154, 20005,
-# 22571, 24055, 26057, 27835, 29126,
+# 10339, 10573, 12141, 13541,
+# 15186, 16371,
+# 18154, 20005, 22571,
+# 24055, 26057, 27835, 29126,
 # 29370, 30402, 35049, 36530, 37970,
 # 38671, 39990, 41425, 41855, 42120,
 # 43253
@@ -101,7 +101,7 @@ with open(open_file, "r") as f:
             print(e)
         file.write("\n".join(csv_data))
         file.write("\n")
-        time.sleep(.1 + random.random() * 3.)
+        time.sleep(.1 + random.random() * 2.)
     print("finish")
     import datetime
     print(datetime.datetime.now())
