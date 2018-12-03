@@ -9,11 +9,13 @@ from bs4 import BeautifulSoup
 root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
-# open_file = "data/mistake.2.csv"
+open_file = "data/mistake.2.csv"
 output_file = "data/areaid_level4_zh.15.csv"
 begin = 38671
-# begin = 1
+begin = 1
 end = 43253
+# 17, 18
+
 # 1, 337, 642, 2990,
 # 4472, 5740, 7330, 8368,
 # 10339, 10573, 12141, 13541,
