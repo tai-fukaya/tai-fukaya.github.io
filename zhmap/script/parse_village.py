@@ -9,10 +9,10 @@ from bs4 import BeautifulSoup
 root_host = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2017/"
 tr_class = "villagetr"
 open_file = "data/areaid_level3_zh.csv"
-# open_file = "data/mistake.2.csv"
+open_file = "data/mistake.2.csv"
 output_file = "data/areaid_level4_zh.mistake.csv"
 begin = 38671
-# begin = 1
+begin = 1
 end = 43253
 # 16, 17, 22 -
 
@@ -44,7 +44,6 @@ def get_url(info):
     res = subprocess.check_output([
         "curl", root_host + info.url, "-m", "30"
     ])
-
     return BeautifulSoup(res.decode('gbk'), "lxml")
 
 
